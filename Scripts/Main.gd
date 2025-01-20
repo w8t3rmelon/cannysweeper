@@ -221,6 +221,10 @@ func get_adjacent_tiles(coord: Vector2i):
 func mark_tiles():
 	var currentMines = 0
 	print("placing mines")
+	var boardSize = GSettings.width * GSettings.height
+	if GSettings.mines >= boardSize:
+		OS.alert("I can't put %d mines on the board! Limiting to %d mines." % [GSettings.mines, boardSize - 1])
+		GSettings.mines = boardSize - 1
 	while currentMines < GSettings.mines:
 		var t = tiles[randi_range(0, GSettings.height - 1)][randi_range(0, GSettings.width - 1)]
 		if not t.hasMine:
