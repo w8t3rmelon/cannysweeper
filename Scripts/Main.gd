@@ -195,14 +195,14 @@ func win_check():
 
 func get_adjacent_tiles(coord: Vector2i):
 	var tl = get_tile(coord + Vector2i(-1, -1))
-	var tc = get_tile(coord + Vector2i(-1, 0))
-	var tr = get_tile(coord + Vector2i(-1, 1))
+	var tc = get_tile(coord + Vector2i(0, -1))
+	var tr = get_tile(coord + Vector2i(1, -1))
 	
-	var cl = get_tile(coord + Vector2i(0, -1))
-	var cr = get_tile(coord + Vector2i(0, 1))
+	var cl = get_tile(coord + Vector2i(-1, 0))
+	var cr = get_tile(coord + Vector2i(1, 0))
 	
-	var bl = get_tile(coord + Vector2i(1, -1))
-	var bc = get_tile(coord + Vector2i(1, 0))
+	var bl = get_tile(coord + Vector2i(-1, 1))
+	var bc = get_tile(coord + Vector2i(0, 1))
 	var br = get_tile(coord + Vector2i(1, 1))
 	
 	var adj = []
