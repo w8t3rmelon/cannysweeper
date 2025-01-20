@@ -179,6 +179,7 @@ func reveal_callback(tile: Tile):
 		gameover()
 		return
 		
+	SND.snd_play(Enums.Sound.BREAK)
 	reveal_empty_space(tile)
 	
 	if win_check():

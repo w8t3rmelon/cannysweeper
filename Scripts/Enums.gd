@@ -9,7 +9,7 @@ enum TileType {
 
 enum Sound {
 	JUMPSCARE,
-	NOPE
+	BREAK
 }
 
 enum Music {

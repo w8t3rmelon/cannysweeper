@@ -8,7 +8,7 @@ var sfxPlayback: AudioStreamPlaybackPolyphonic
 
 var sounds = [
 	preload("res://Sounds/Jumpscare.ogg"), # Enums.Sound.JUMPSCARE
-	preload("res://Sounds/Nope.wav") # Enums.Sound.NOPE
+	preload("res://Sounds/Break.ogg") # Enums.Sound.BREAK
 ]
 
 var music = [
