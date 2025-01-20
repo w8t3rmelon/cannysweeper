@@ -43,7 +43,7 @@ func _input(e: InputEvent):
 					zoom = 10
 				board.scale = boardScale * (zoom / 100.0)
 	elif e is InputEventMouseMotion and panning:
-		boardOffset += e.relative
+		boardOffset += e.screen_relative
 		board.position = boardPosition + boardOffset
 
 func gameover():
@@ -291,7 +291,8 @@ func new_game():
 		make_row.call_deferred(y)
 	
 	print("positioning board")
-	board.position = (board.size / 2) - ((Vector2(GSettings.width, GSettings.height) * 32) / 2)
+	boardPosition = (board.size / 2) - ((Vector2(GSettings.width, GSettings.height) * 32) / 2)
+	board.position = boardPosition + boardOffset
 	board.pivot_offset = ((Vector2(GSettings.width, GSettings.height) * 32) / 2)
 	
 	# code was stolen from kmines (minefielditem.cpp:252) for this
