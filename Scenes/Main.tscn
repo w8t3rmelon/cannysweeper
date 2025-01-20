@@ -14,9 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://ccgi4sko6kjxy" path="res://Art/SheetSlices/Main/unsure.tres" id="6_jw32o"]
 [ext_resource type="Resource" uid="uid://c4gf0mb87ucqf" path="res://DifficultyPresets/4medium.tres" id="6_vxsxd"]
 [ext_resource type="Resource" uid="uid://c56r2n4nbrmrk" path="res://DifficultyPresets/5hard.tres" id="7_fyxqn"]
-[ext_resource type="Script" path="res://Scripts/Menus/FileMenu.gd" id="7_vy5pj"]
+[ext_resource type="Script" uid="uid://by1hm7sil0bep" path="res://Scripts/Menus/FileMenu.gd" id="7_vy5pj"]
 [ext_resource type="Resource" uid="uid://ccog4j0m4tbjs" path="res://DifficultyPresets/6twig.tres" id="8_p3wa0"]
-[ext_resource type="Script" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
+[ext_resource type="Script" uid="uid://c4ymy57hq773f" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wa80"]
 bg_color = Color(0.230315, 0.230315, 0.230315, 1)
