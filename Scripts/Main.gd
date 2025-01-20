@@ -318,7 +318,7 @@ func _ready():
 	$ConfigurationWindow/Container/Difficulty/Box.add_item("Custom", 999)
 
 func _process(delta):
-	if timerCounting:
+	if timerCounting and not gameEnded:
 		time += delta
 	var minutes = time / 60
 	var seconds = fmod(time, 60)
