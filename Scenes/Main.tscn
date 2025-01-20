@@ -351,6 +351,7 @@ text = "Mines"
 layout_mode = 2
 size_flags_horizontal = 3
 min_value = 2.0
+max_value = 5000.0
 value = 10.0
 rounded = true
 suffix = "mines"
