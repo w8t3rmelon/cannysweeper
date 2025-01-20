@@ -135,13 +135,16 @@ func reveal_callback2(tile: Tile):
 		if tile.hasMine:
 			print("first click has mine, relocating")
 			# find first empty tile and relocate the mine there
+			var break2 = false
 			for row in tiles:
+				if break2: break
 				for t in row:
 					if not t.hasMine:
 						t.hasMine = true
+						break2 = true
 						break
 			tile.hasMine = false
-		
+			mark_adjacent()
 		
 		firstClick = false
 		
@@ -166,7 +169,7 @@ func reveal_callback(tile: Tile):
 						t.hasMine = true
 						break
 			tile.hasMine = false
-		
+			mark_adjacent()
 		
 		firstClick = false
 		
@@ -221,6 +224,15 @@ func get_adjacent_tiles(coord: Vector2i):
 	
 	return adj
 	
+func mark_adjacent():
+	for row in tiles:
+		for t in row:
+			var adjacent = get_adjacent_tiles(t.tileCoordinates)
+			var ac = 0
+			for a in adjacent:
+				if a.hasMine: ac += 1
+			t.adjacentMines = ac
+	
 func mark_tiles():
 	var currentMines = 0
 	print("placing mines")
@@ -235,13 +247,8 @@ func mark_tiles():
 			currentMines += 1
 	print("mines done")
 	
-	for row in tiles:
-		for t in row:
-			var adjacent = get_adjacent_tiles(t.tileCoordinates)
-			var ac = 0
-			for a in adjacent:
-				if a.hasMine: ac += 1
-			t.adjacentMines = ac
+	mark_adjacent()
+	
 	print("all done")
 		
 func make_row(i):
