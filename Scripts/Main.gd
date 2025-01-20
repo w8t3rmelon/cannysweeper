@@ -73,6 +73,7 @@ func win():
 	timerCounting = false
 	
 	winScreen.show()
+	SND.snd_play(Enums.Sound.WIN)
 	for row in tiles:
 		for t in row:
 			if t.hasMine:
