@@ -33,12 +33,15 @@ func _input(e: InputEvent):
 	if e is InputEventMouseButton:
 		if e.button_index == MOUSE_BUTTON_MIDDLE:
 			panning = e.pressed
-		elif e.button_index == MOUSE_BUTTON_WHEEL_UP:
-			zoom += 5
-			board.scale = boardScale * (zoom / 100.0)
-		elif e.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			zoom -= 5
-			board.scale = boardScale * (zoom / 100.0)
+		if e.pressed:
+			if e.button_index == MOUSE_BUTTON_WHEEL_UP:
+				zoom += 10
+				board.scale = boardScale * (zoom / 100.0)
+			elif e.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+				zoom -= 10
+				if zoom < 10:
+					zoom = 10
+				board.scale = boardScale * (zoom / 100.0)
 	elif e is InputEventMouseMotion and panning:
 		boardOffset += e.relative
 		board.position = boardPosition + boardOffset
