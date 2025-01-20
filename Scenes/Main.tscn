@@ -270,7 +270,9 @@ script = ExtResource("10_bmxlf")
 [node name="AboutWindow" type="AcceptDialog" parent="."]
 title = "About"
 initial_position = 2
-size = Vector2i(358, 132)
+size = Vector2i(680, 158)
+exclusive = false
+unresizable = true
 dialog_text = "Cannysweeper - A Minesweeper clone featuring the Canny Cat and its evil counterpart
 Test Build 3
 Created by w8t3rm3lon
