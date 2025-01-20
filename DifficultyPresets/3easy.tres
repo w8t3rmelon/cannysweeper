@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Preset" load_steps=2 format=3 uid="uid://dg5wmaxhfalr"]
+
+[ext_resource type="Script" path="res://Scripts/Preset.gd" id="1_81df4"]
+
+[resource]
+script = ExtResource("1_81df4")
+name = &"Easy"
+width = 10
+height = 10
+mines = 15

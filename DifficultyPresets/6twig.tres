@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Preset" load_steps=2 format=3 uid="uid://ccog4j0m4tbjs"]
+
+[ext_resource type="Script" path="res://Scripts/Preset.gd" id="1_x0qn0"]
+
+[resource]
+script = ExtResource("1_x0qn0")
+name = &"TwiGinTec"
+width = 70
+height = 70
+mines = 1200

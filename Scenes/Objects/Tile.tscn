@@ -1,0 +1,42 @@
+[gd_scene load_steps=18 format=3 uid="uid://b2427eidvws8o"]
+
+[ext_resource type="Texture2D" uid="uid://cp8y1t0u4rajh" path="res://Art/SheetSlices/Main/blocked.tres" id="1_8f8sq"]
+[ext_resource type="Script" path="res://Scripts/Objects/Tile.gd" id="1_xfqoi"]
+[ext_resource type="Texture2D" uid="uid://qaorey0stcgs" path="res://Art/SheetSlices/Main/clicked.tres" id="2_pixvy"]
+[ext_resource type="Texture2D" uid="uid://c4bi0qmri0vss" path="res://Art/SheetSlices/Main/empty.tres" id="4_g76gi"]
+[ext_resource type="Texture2D" uid="uid://bkjqnua3j7f23" path="res://Art/SheetSlices/Main/flagged.tres" id="5_pg1kd"]
+[ext_resource type="Texture2D" uid="uid://ccgi4sko6kjxy" path="res://Art/SheetSlices/Main/unsure.tres" id="6_wgb15"]
+[ext_resource type="Texture2D" uid="uid://crm3y6hqew51s" path="res://Art/SheetSlices/Main/mine.tres" id="7_n8seo"]
+[ext_resource type="Texture2D" uid="uid://ddvx4tvnbmklg" path="res://Art/SheetSlices/Main/1adj.tres" id="8_ay8oh"]
+[ext_resource type="Texture2D" uid="uid://b2o8ajgwqyumy" path="res://Art/SheetSlices/Main/minewin.tres" id="8_iod5k"]
+[ext_resource type="Texture2D" uid="uid://uoo35nwupycs" path="res://Art/SheetSlices/Main/2adj.tres" id="9_4kyqo"]
+[ext_resource type="Texture2D" uid="uid://bx00fr2b0ux3g" path="res://Art/SheetSlices/Main/flaggednomine.tres" id="9_rgw60"]
+[ext_resource type="Texture2D" uid="uid://dc87gs7nitwka" path="res://Art/SheetSlices/Main/3adj.tres" id="10_yjk4j"]
+[ext_resource type="Texture2D" uid="uid://dt46716x4cmk5" path="res://Art/SheetSlices/Main/4adj.tres" id="11_sphgs"]
+[ext_resource type="Texture2D" uid="uid://dd0fg4eslnwfy" path="res://Art/SheetSlices/Main/5adj.tres" id="12_ddqv0"]
+[ext_resource type="Texture2D" uid="uid://c846n67wyyih8" path="res://Art/SheetSlices/Main/6adj.tres" id="13_sphgs"]
+[ext_resource type="Texture2D" uid="uid://b8njauye6kwsy" path="res://Art/SheetSlices/Main/7adj.tres" id="14_ddqv0"]
+[ext_resource type="Texture2D" uid="uid://bjvh5uiycft4v" path="res://Art/SheetSlices/Main/8adj.tres" id="15_iod5k"]
+
+[node name="Tile" type="TextureRect"]
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("1_8f8sq")
+expand_mode = 1
+script = ExtResource("1_xfqoi")
+blockedTexture = ExtResource("1_8f8sq")
+clickedTexture = ExtResource("2_pixvy")
+emptyTexture = ExtResource("4_g76gi")
+flaggedTexture = ExtResource("5_pg1kd")
+unsureTexture = ExtResource("6_wgb15")
+mineTexture = ExtResource("7_n8seo")
+mineWinTexture = ExtResource("8_iod5k")
+flaggedNoMineTexture = ExtResource("9_rgw60")
+adjacencyTextures = Array[Texture]([ExtResource("8_ay8oh"), ExtResource("9_4kyqo"), ExtResource("10_yjk4j"), ExtResource("11_sphgs"), ExtResource("12_ddqv0"), ExtResource("13_sphgs"), ExtResource("14_ddqv0"), ExtResource("15_iod5k")])
+
+[node name="FakeCanny" type="TextureRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("1_8f8sq")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Preset" load_steps=2 format=3 uid="uid://6wtihwn5i271"]
+
+[ext_resource type="Script" path="res://Scripts/Preset.gd" id="1_k6lpi"]
+
+[resource]
+script = ExtResource("1_k6lpi")
+name = &"Baby"
+width = 8
+height = 8
+mines = 3
