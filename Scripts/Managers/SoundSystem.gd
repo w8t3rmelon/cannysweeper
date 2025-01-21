@@ -13,7 +13,7 @@ var sounds = [
 ]
 
 var music = [
-	
+	preload("res://Music/MainTheme.ogg") # Enums.Music.DEFAULT
 ]
 
 func _ready():
@@ -35,3 +35,19 @@ func _ready():
 
 func snd_play(snd: Enums.Sound):
 	sfxPlayback.play_stream(sounds[snd])
+
+func mus_play(mus: Enums.Music):
+	musicTrack.pitch_scale = 1
+	musicTrack.stream = music[mus]
+	musicTrack.play()
+
+func mus_windup(mus: Enums.Music, duration):
+	mus_play(mus)
+	musicTrack.pitch_scale = 0.01
+	var squeen = get_tree().create_tween()
+	squeen.tween_property(musicTrack, "pitch_scale", 1, duration)
+	
+func mus_winddown(duration):
+	var squeen = get_tree().create_tween()
+	squeen.tween_property(musicTrack, "pitch_scale", 0.01, duration)
+	squeen.tween_callback(func(): musicTrack.stop())

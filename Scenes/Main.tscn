@@ -410,14 +410,29 @@ fit_content = true
 auto_translate_mode = 1
 title = "Configure"
 initial_position = 2
-size = Vector2i(358, 228)
+size = Vector2i(358, 274)
+visible = true
 ok_button_text = "Save"
 
 [node name="Container" type="VBoxContainer" parent="ConfigurationWindow"]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 350.0
-offset_bottom = 179.0
+offset_bottom = 225.0
+
+[node name="BGMVolume" type="HBoxContainer" parent="ConfigurationWindow/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConfigurationWindow/Container/BGMVolume"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="Box" type="HSlider" parent="ConfigurationWindow/Container/BGMVolume"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = -80.0
+max_value = 0.0
 
 [node name="Difficulty" type="HBoxContainer" parent="ConfigurationWindow/Container"]
 layout_mode = 2
@@ -488,4 +503,5 @@ text = "Limit VFX"
 [connection signal="index_pressed" from="Menu/File" to="Menu/File" method="_index_pressed"]
 [connection signal="index_pressed" from="Menu/Help" to="Menu/Help" method="_index_pressed"]
 [connection signal="confirmed" from="ConfigurationWindow" to="." method="_on_configuration_window_confirmed"]
+[connection signal="value_changed" from="ConfigurationWindow/Container/BGMVolume/Box" to="." method="_on_music_volume_changed"]
 [connection signal="item_selected" from="ConfigurationWindow/Container/Difficulty/Box" to="." method="_on_difficulty_selected"]

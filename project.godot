@@ -38,6 +38,7 @@ folder_colors={
 "res://ArtSources/": "orange",
 "res://DifficultyPresets/": "green",
 "res://Fonts/": "gray",
+"res://Music/": "blue",
 "res://Scenes/": "purple",
 "res://Scripts/": "blue",
 "res://Sounds/": "teal"

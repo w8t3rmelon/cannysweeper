@@ -1,0 +1,491 @@
+[gd_scene load_steps=27 format=3 uid="uid://dcb1hpgwfclgd"]
+
+[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_r150o"]
+[ext_resource type="Texture2D" uid="uid://1q4kml3xkn58" path="res://Art/Uncanny.png" id="2_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://dmxaoip6x02i" path="res://Art/HUDBG.png" id="2_idj7w"]
+[ext_resource type="Script" path="res://Scripts/Preset.gd" id="2_s41n8"]
+[ext_resource type="Resource" uid="uid://dj3csw2ylno7x" path="res://DifficultyPresets/1robert.tres" id="3_2i2af"]
+[ext_resource type="Texture2D" uid="uid://cqwy6u14umb01" path="res://Art/Logo.png" id="3_kln2b"]
+[ext_resource type="Resource" uid="uid://6wtihwn5i271" path="res://DifficultyPresets/2baby.tres" id="4_giki3"]
+[ext_resource type="Texture2D" uid="uid://cp8y1t0u4rajh" path="res://Art/SheetSlices/Main/blocked.tres" id="4_rgh2o"]
+[ext_resource type="Resource" uid="uid://dg5wmaxhfalr" path="res://DifficultyPresets/3easy.tres" id="5_ct8cu"]
+[ext_resource type="Texture2D" uid="uid://bkjqnua3j7f23" path="res://Art/SheetSlices/Main/flagged.tres" id="5_jw32o"]
+[ext_resource type="Texture2D" uid="uid://crm3y6hqew51s" path="res://Art/SheetSlices/Main/mine.tres" id="5_v1gob"]
+[ext_resource type="Texture2D" uid="uid://ccgi4sko6kjxy" path="res://Art/SheetSlices/Main/unsure.tres" id="6_jw32o"]
+[ext_resource type="Resource" uid="uid://c4gf0mb87ucqf" path="res://DifficultyPresets/4medium.tres" id="6_vxsxd"]
+[ext_resource type="Resource" uid="uid://c56r2n4nbrmrk" path="res://DifficultyPresets/5hard.tres" id="7_fyxqn"]
+[ext_resource type="Script" path="res://Scripts/Menus/FileMenu.gd" id="7_vy5pj"]
+[ext_resource type="Resource" uid="uid://ccog4j0m4tbjs" path="res://DifficultyPresets/6twig.tres" id="8_p3wa0"]
+[ext_resource type="Script" uid="uid://c4ymy57hq773f" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://bj5kqi02cb1al" path="res://Art/CoolBetaBadge.png" id="12_j6h4m"]
+[ext_resource type="Texture2D" uid="uid://gq13yrfx6lk6" path="res://Art/Pause.png" id="15_vqus1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spn41"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(0, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwwf1"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(174, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6k80"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(348, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1sa5"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(522, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3liy"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(696, 0, 174, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5r8rw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spn41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwwf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6k80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1sa5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3liy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 25.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wa80"]
+bg_color = Color(0.230315, 0.230315, 0.230315, 1)
+
+[node name="Main" type="Control" node_paths=PackedStringArray("board", "zoomIndicator", "gameOverScreen", "winScreen", "uncannyJumpscare")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_r150o")
+board = NodePath("GameView/Board")
+zoomIndicator = NodePath("GameView/ZoomIndicator")
+gameOverScreen = NodePath("GameView/GameOver")
+winScreen = NodePath("GameView/Win")
+uncannyJumpscare = NodePath("GameView/UncannyJumpscare")
+difficulties = Array[ExtResource("2_s41n8")]([ExtResource("3_2i2af"), ExtResource("4_giki3"), ExtResource("5_ct8cu"), ExtResource("6_vxsxd"), ExtResource("7_fyxqn"), ExtResource("8_p3wa0")])
+
+[node name="GameView" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 256.0
+offset_top = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Welcome" type="RichTextLabel" parent="GameView"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+bbcode_enabled = true
+text = "[center][font_size=32][wave freq=10 amp=30]Welcome to Cannysweeper![/wave]
+[font_size=16]
+Tip: You can use the scroll wheel to zoom in and out of the board. Dragging with the middle mouse button held down also lets you move it!
+
+Click on \"New Game\" in the File menu to start a new game."
+
+[node name="Board" type="Control" parent="GameView"]
+custom_minimum_size = Vector2(512, 480)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZoomIndicator" type="Label" parent="GameView"]
+visible = false
+layout_mode = 1
+offset_right = 230.0
+offset_bottom = 36.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "100%"
+vertical_alignment = 1
+
+[node name="Win" type="Panel" parent="GameView"]
+visible = false
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameView/Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -43.5
+offset_right = 34.0
+offset_bottom = -20.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Win!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGame" type="Button" parent="GameView/Win"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = 16.5
+offset_right = 42.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Game"
+
+[node name="GameOver" type="Panel" parent="GameView"]
+visible = false
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameView/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -43.5
+offset_right = 34.0
+offset_bottom = -20.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "This Guy Fucking Sucks at Cannysweeper!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NewGame" type="Button" parent="GameView/GameOver"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = 16.5
+offset_right = 42.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "New Game"
+
+[node name="Paused" type="Panel" parent="GameView"]
+visible = false
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="GameView/Paused"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -43.5
+offset_right = 34.0
+offset_bottom = -20.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Paused!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="GameView/Paused"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.5
+offset_top = 16.5
+offset_right = 42.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="UncannyJumpscare" type="TextureRect" parent="GameView"]
+visible = false
+z_index = 4096
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bmxlf")
+expand_mode = 1
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_top = 32.0
+offset_right = 256.0
+grow_vertical = 2
+
+[node name="HUDBackground" type="TextureRect" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_idj7w")
+expand_mode = 1
+
+[node name="Logo" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_right = 249.0
+offset_bottom = 144.0
+texture = ExtResource("3_kln2b")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Badge" type="AnimatedSprite2D" parent="HUD/Logo"]
+position = Vector2(249, 145)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_5r8rw")
+autoplay = "default"
+frame_progress = 0.655754
+offset = Vector2(-87, -12)
+
+[node name="Time" type="Label" parent="HUD"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 150.0
+offset_right = 234.0
+offset_bottom = 186.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Time: --:--"
+vertical_alignment = 1
+
+[node name="Mines" type="Label" parent="HUD"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 190.0
+offset_right = 234.0
+offset_bottom = 226.0
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 24
+text = "Mines: -/-"
+vertical_alignment = 1
+
+[node name="MenuBG" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7wa80")
+
+[node name="Menu" type="MenuBar" parent="."]
+z_index = 1
+layout_mode = 1
+offset_right = 83.0
+offset_bottom = 31.0
+flat = true
+prefer_global_menu = false
+
+[node name="File" type="PopupMenu" parent="Menu"]
+size = Vector2i(137, 152)
+system_menu_id = 2
+prefer_native_menu = true
+item_count = 4
+item_0/text = "New Game"
+item_0/icon = ExtResource("4_rgh2o")
+item_1/text = "Configure"
+item_1/icon = ExtResource("5_jw32o")
+item_1/id = 1
+item_2/text = "Pause"
+item_2/icon = ExtResource("15_vqus1")
+item_2/id = 2
+item_3/text = "Quit"
+item_3/icon = ExtResource("5_v1gob")
+item_3/id = 3
+script = ExtResource("7_vy5pj")
+
+[node name="Help" type="PopupMenu" parent="Menu"]
+auto_translate_mode = 1
+size = Vector2i(137, 100)
+system_menu_id = 2
+prefer_native_menu = true
+item_count = 1
+item_0/text = "About"
+item_0/icon = ExtResource("6_jw32o")
+script = ExtResource("10_bmxlf")
+
+[node name="AboutWindow" type="AcceptDialog" parent="."]
+title = "About"
+initial_position = 2
+size = Vector2i(768, 176)
+exclusive = false
+unresizable = true
+
+[node name="Control" type="Control" parent="AboutWindow"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FakeCanny" type="TextureRect" parent="AboutWindow/Control"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 76.0
+offset_bottom = 76.0
+texture = ExtResource("4_rgh2o")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AboutWindow/Control"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 8.0
+offset_right = 786.0
+offset_bottom = 169.0
+bbcode_enabled = true
+text = "Cannysweeper - A Minesweeper clone featuring the Canny Cat and its evil counterpart
+Beta Build 1
+Created by w8t3rm3lon
+The \"Canny Cat\" is property of @PurrfessorJones"
+fit_content = true
+
+[node name="ConfigurationWindow" type="ConfirmationDialog" parent="."]
+auto_translate_mode = 1
+title = "Configure"
+initial_position = 2
+size = Vector2i(358, 228)
+ok_button_text = "Save"
+
+[node name="Container" type="VBoxContainer" parent="ConfigurationWindow"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 350.0
+offset_bottom = 179.0
+
+[node name="Difficulty" type="HBoxContainer" parent="ConfigurationWindow/Container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConfigurationWindow/Container/Difficulty"]
+layout_mode = 2
+text = "Difficulty"
+
+[node name="Box" type="OptionButton" parent="ConfigurationWindow/Container/Difficulty"]
+layout_mode = 2
+
+[node name="Width" type="HBoxContainer" parent="ConfigurationWindow/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConfigurationWindow/Container/Width"]
+layout_mode = 2
+text = "Width"
+
+[node name="Box" type="SpinBox" parent="ConfigurationWindow/Container/Width"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+value = 10.0
+rounded = true
+suffix = "tiles"
+
+[node name="Height" type="HBoxContainer" parent="ConfigurationWindow/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConfigurationWindow/Container/Height"]
+layout_mode = 2
+text = "Height"
+
+[node name="Box" type="SpinBox" parent="ConfigurationWindow/Container/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+value = 10.0
+rounded = true
+suffix = "tiles"
+
+[node name="Mines" type="HBoxContainer" parent="ConfigurationWindow/Container"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ConfigurationWindow/Container/Mines"]
+layout_mode = 2
+text = "Mines"
+
+[node name="Box" type="SpinBox" parent="ConfigurationWindow/Container/Mines"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 2.0
+max_value = 5000.0
+value = 10.0
+rounded = true
+suffix = "mines"
+
+[node name="LimitVFX" type="CheckBox" parent="ConfigurationWindow/Container"]
+layout_mode = 2
+text = "Limit VFX"
+
+[connection signal="pressed" from="GameView/Win/NewGame" to="." method="new_game"]
+[connection signal="pressed" from="GameView/GameOver/NewGame" to="." method="new_game"]
+[connection signal="pressed" from="GameView/Paused/Resume" to="." method="resume"]
+[connection signal="index_pressed" from="Menu/File" to="Menu/File" method="_index_pressed"]
+[connection signal="index_pressed" from="Menu/Help" to="Menu/Help" method="_index_pressed"]
+[connection signal="confirmed" from="ConfigurationWindow" to="." method="_on_configuration_window_confirmed"]
+[connection signal="item_selected" from="ConfigurationWindow/Container/Difficulty/Box" to="." method="_on_difficulty_selected"]

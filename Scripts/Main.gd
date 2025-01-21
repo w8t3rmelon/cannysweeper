@@ -60,6 +60,7 @@ func gameover():
 	gameEnded = true
 	timerCounting = false
 	
+	SND.mus_winddown(2)
 	SND.snd_play(Enums.Sound.JUMPSCARE)
 	uncannyJumpscare.show()
 	var squeen = get_tree().create_tween()
@@ -325,6 +326,8 @@ func new_game():
 	print("marking tiles")
 	mark_tiles.call_deferred()
 	
+	SND.mus_play(Enums.Music.DEFAULT)
+	
 func _ready():
 	for p in difficulties:
 		$ConfigurationWindow/Container/Difficulty/Box.add_item(p.name)
@@ -365,3 +368,7 @@ func _on_difficulty_selected(index):
 		$ConfigurationWindow/Container/Width.hide()
 		$ConfigurationWindow/Container/Height.hide()
 		$ConfigurationWindow/Container/Mines.hide()
+
+
+func _on_music_volume_changed(value):
+	AudioServer.set_bus_volume_db(1, value)
