@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Preset" load_steps=2 format=3 uid="uid://c56r2n4nbrmrk"]
 
-[ext_resource type="Script" path="res://Scripts/Preset.gd" id="1_anhfa"]
+[ext_resource type="Script" path="res://Scripts/Resources/Preset.gd" id="1_anhfa"]
 
 [resource]
 script = ExtResource("1_anhfa")

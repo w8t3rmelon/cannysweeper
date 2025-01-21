@@ -1,4 +1,4 @@
-extends Node
+extends Control
 
 var tileTemplate = preload("res://Scenes/Objects/Tile.tscn")
 
@@ -278,9 +278,8 @@ func make_row(i):
 		board.add_child.call_deferred(tile)
 		row.push_back(tile)
 	tiles.push_back(row)
-
-func new_game():
-	print("clearing everything")
+	
+func reset():
 	$GameView/Welcome.hide()
 	zoom = 100
 	boardOffset = Vector2.ZERO
@@ -298,6 +297,72 @@ func new_game():
 	
 	winScreen.hide()
 	gameOverScreen.hide()
+	
+func load_from_save():
+	if ResourceLoader.exists("user://Save.res"):
+		var savedata: SaveData = ResourceLoader.load("user://Save.res")
+		reset()
+		
+		time = savedata.timer
+		GSettings.width = savedata.width
+		GSettings.height = savedata.height
+		GSettings.mines = savedata.mines
+		
+		for crow in savedata.rows:
+			var y = 0
+			var row = []
+			for ctile: TileCompact in crow.tiles:
+				var x = 0
+				var tile: Tile = tileTemplate.instantiate()
+				tile.tileCoordinates = Vector2i(x, y)
+				tile.position = (Vector2i(x, y) * 32)
+				tile.revealed.connect(func(): reveal_callback(tile))
+				tile.revealed2.connect(func(): reveal_callback2(tile))
+				tile.flagStateChanged.connect(flag_state_change_callback)
+				if ctile.state & Enums.TileCompactState.BLOCKED:
+					tile.type = Enums.TileType.BLOCKED
+				elif ctile.state & Enums.TileCompactState.FLAGGED:
+					tile.type = Enums.TileType.FLAGGED
+				elif ctile.state & Enums.TileCompactState.UNSURE:
+					tile.type = Enums.TileType.UNSURE
+				else:
+					tile.type = Enums.TileType.CLEARED
+					
+				if ctile.state & Enums.TileCompactState.HAS_MINE:
+					tile.hasMine = true
+				board.add_child.call_deferred(tile)
+				row.append(tile)
+				x += 1
+			tiles.append(row)
+			y += 1
+		
+		print("positioning board")
+		boardPosition = (board.size / 2) - ((Vector2(GSettings.width, GSettings.height) * 32) / 2)
+		board.position = boardPosition + boardOffset
+		board.pivot_offset = ((Vector2(GSettings.width, GSettings.height) * 32) / 2)
+		
+		# code was stolen from kmines (minefielditem.cpp:252) for this
+		var xAxisDominant = (GSettings.width + 1) / board.size.x > (GSettings.height + 1) / board.size.y
+		var size = 0
+		if xAxisDominant:
+			size = board.size.x / (GSettings.width + 1)
+		else:
+			size = board.size.y / (GSettings.height + 1)
+		boardScale = Vector2.ONE * (size / 32)
+		
+		board.scale = boardScale
+		
+		$HUD/Mines.text = "Mines: %d/%d" % [markedMines, GSettings.mines]
+		
+		print("marking tiles")
+		mark_adjacent()
+		
+		SND.mus_play(Enums.Music.DEFAULT)
+	else:
+		OS.alert("You do not have an active save file.")
+
+func new_game():
+	reset()
 	
 	print("making rows")
 	for y in range(0, GSettings.height):
@@ -321,14 +386,29 @@ func new_game():
 	
 	$HUD/Mines.text = "Mines: %d/%d" % [markedMines, GSettings.mines]
 	
-	await get_tree().process_frame
-	
 	print("marking tiles")
 	mark_tiles.call_deferred()
 	
 	SND.mus_play(Enums.Music.DEFAULT)
 	
+func quit():
+	SaveManager.saveState(tiles)
+	
+	if randi_range(1, 4) == 2:
+		uncannyJumpscare.show()
+		SND.snd_play(Enums.Sound.JUMPSCARE)
+		await get_tree().create_timer(0.2).timeout
+	else:
+		modulate = Color(0.5, 0.5, 0.5, 1)
+	
+	get_tree().quit()
+	
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		quit()
+	
 func _ready():
+	get_tree().set_auto_accept_quit(false)
 	for p in difficulties:
 		$ConfigurationWindow/Container/Difficulty/Box.add_item(p.name)
 	$ConfigurationWindow/Container/Difficulty/Box.add_item("Custom", 999)
