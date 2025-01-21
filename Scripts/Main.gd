@@ -19,6 +19,7 @@ var timerCounting = false
 var time = 0.0
 
 var gameEnded = false
+var paused = false
 
 var markedMines = 0
 
@@ -28,6 +29,14 @@ var boardOffset = Vector2.ZERO
 var zoom = 100.0
 
 var panning = false
+
+func pause():
+	paused = true
+	$GameView/Paused.show()
+
+func resume():
+	paused = false
+	$GameView/Paused.hide()
 
 func _input(e: InputEvent):
 	if e is InputEventMouseButton:
@@ -319,7 +328,7 @@ func _ready():
 	$ConfigurationWindow/Container/Difficulty/Box.add_item("Custom", 999)
 
 func _process(delta):
-	if timerCounting and not gameEnded:
+	if timerCounting and not gameEnded and not paused:
 		time += delta
 	var minutes = time / 60
 	var seconds = fmod(time, 60)
