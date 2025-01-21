@@ -173,10 +173,13 @@ func reveal_callback(tile: Tile):
 		if tile.hasMine:
 			print("first click has mine, relocating")
 			# find first empty tile and relocate the mine there
+			var break2 = false
 			for row in tiles:
+				if break2: break
 				for t in row:
 					if not t.hasMine:
 						t.hasMine = true
+						break2 = true
 						break
 			tile.hasMine = false
 			mark_adjacent()
