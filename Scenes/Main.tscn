@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dcb1hpgwfclgd"]
+[gd_scene load_steps=26 format=3 uid="uid://dcb1hpgwfclgd"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_r150o"]
 [ext_resource type="Texture2D" uid="uid://1q4kml3xkn58" path="res://Art/Uncanny.png" id="2_bmxlf"]
@@ -17,6 +17,50 @@
 [ext_resource type="Script" uid="uid://by1hm7sil0bep" path="res://Scripts/Menus/FileMenu.gd" id="7_vy5pj"]
 [ext_resource type="Resource" uid="uid://ccog4j0m4tbjs" path="res://DifficultyPresets/6twig.tres" id="8_p3wa0"]
 [ext_resource type="Script" uid="uid://c4ymy57hq773f" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
+[ext_resource type="Texture2D" uid="uid://bj5kqi02cb1al" path="res://Art/CoolBetaBadge.png" id="12_j6h4m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spn41"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(0, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwwf1"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(174, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m6k80"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(348, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r1sa5"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(522, 0, 174, 89)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3liy"]
+atlas = ExtResource("12_j6h4m")
+region = Rect2(696, 0, 174, 89)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5r8rw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spn41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwwf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m6k80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r1sa5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3liy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 25.0
+}]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7wa80"]
 bg_color = Color(0.230315, 0.230315, 0.230315, 1)
@@ -204,6 +248,14 @@ texture = ExtResource("3_kln2b")
 expand_mode = 1
 stretch_mode = 4
 
+[node name="Badge" type="AnimatedSprite2D" parent="HUD/Logo"]
+position = Vector2(249, 145)
+scale = Vector2(0.7, 0.7)
+sprite_frames = SubResource("SpriteFrames_5r8rw")
+autoplay = "default"
+frame_progress = 0.834789
+offset = Vector2(-87, -12)
+
 [node name="Time" type="Label" parent="HUD"]
 layout_mode = 1
 offset_left = 4.0
@@ -270,13 +322,43 @@ script = ExtResource("10_bmxlf")
 [node name="AboutWindow" type="AcceptDialog" parent="."]
 title = "About"
 initial_position = 2
-size = Vector2i(680, 158)
+size = Vector2i(768, 176)
+visible = true
 exclusive = false
 unresizable = true
-dialog_text = "Cannysweeper - A Minesweeper clone featuring the Canny Cat and its evil counterpart
-Test Build 3
+
+[node name="Control" type="Control" parent="AboutWindow"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FakeCanny" type="TextureRect" parent="AboutWindow/Control"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 76.0
+offset_bottom = 76.0
+texture = ExtResource("4_rgh2o")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AboutWindow/Control"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 8.0
+offset_right = 786.0
+offset_bottom = 169.0
+bbcode_enabled = true
+text = "Cannysweeper - A Minesweeper clone featuring the Canny Cat and its evil counterpart
+Beta Build 1
 Created by w8t3rm3lon
 The \"Canny Cat\" is property of @PurrfessorJones"
+fit_content = true
 
 [node name="ConfigurationWindow" type="ConfirmationDialog" parent="."]
 auto_translate_mode = 1
