@@ -1,5 +1,5 @@
 class_name TileCompact
 extends Resource
 
-# cast to TileCompactState
-@export_flags("BLOCKED", "FLAGGED", "UNSURE", "HAS_MINE") var state: int
+@export var type: Enums.TileType
+@export var hasMine: bool

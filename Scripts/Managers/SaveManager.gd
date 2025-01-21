@@ -1,20 +1,15 @@
 extends Node
 
 func saveState(tiles):
+	if len(tiles) == 0: return
 	var savedata = SaveData.new()
 	for row in tiles:
 		var tilerow = TileRow.new()
 		var compactTiles: Array[TileCompact] = []
 		for tile: Tile in row:
 			var compactTile = TileCompact.new()
-			if tile.hasMine:
-				compactTile.state |= Enums.TileCompactState.HAS_MINE
-			if tile.type == Enums.TileType.BLOCKED:
-				compactTile.state |= Enums.TileCompactState.BLOCKED
-			elif tile.type == Enums.TileType.FLAGGED:
-				compactTile.state |= Enums.TileCompactState.FLAGGED
-			elif tile.type == Enums.TileType.UNSURE:
-				compactTile.state |= Enums.TileCompactState.UNSURE
+			compactTile.hasMine = tile.hasMine
+			compactTile.type = tile.type
 			compactTiles.append(compactTile)
 		tilerow.tiles = compactTiles
 		savedata.rows.append(tilerow)

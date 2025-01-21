@@ -308,28 +308,19 @@ func load_from_save():
 		GSettings.height = savedata.height
 		GSettings.mines = savedata.mines
 		
+		var y = 0
 		for crow in savedata.rows:
-			var y = 0
 			var row = []
+			var x = 0
 			for ctile: TileCompact in crow.tiles:
-				var x = 0
 				var tile: Tile = tileTemplate.instantiate()
 				tile.tileCoordinates = Vector2i(x, y)
 				tile.position = (Vector2i(x, y) * 32)
 				tile.revealed.connect(func(): reveal_callback(tile))
 				tile.revealed2.connect(func(): reveal_callback2(tile))
 				tile.flagStateChanged.connect(flag_state_change_callback)
-				if ctile.state & Enums.TileCompactState.BLOCKED:
-					tile.type = Enums.TileType.BLOCKED
-				elif ctile.state & Enums.TileCompactState.FLAGGED:
-					tile.type = Enums.TileType.FLAGGED
-				elif ctile.state & Enums.TileCompactState.UNSURE:
-					tile.type = Enums.TileType.UNSURE
-				else:
-					tile.type = Enums.TileType.CLEARED
-					
-				if ctile.state & Enums.TileCompactState.HAS_MINE:
-					tile.hasMine = true
+				tile.type = ctile.type
+				tile.hasMine = ctile.hasMine
 				board.add_child.call_deferred(tile)
 				row.append(tile)
 				x += 1
