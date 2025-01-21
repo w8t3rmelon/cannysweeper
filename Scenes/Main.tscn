@@ -16,7 +16,7 @@
 [ext_resource type="Resource" uid="uid://c56r2n4nbrmrk" path="res://DifficultyPresets/5hard.tres" id="7_fyxqn"]
 [ext_resource type="Script" path="res://Scripts/Menus/FileMenu.gd" id="7_vy5pj"]
 [ext_resource type="Resource" uid="uid://ccog4j0m4tbjs" path="res://DifficultyPresets/6twig.tres" id="8_p3wa0"]
-[ext_resource type="Script" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
+[ext_resource type="Script" uid="uid://c4ymy57hq773f" path="res://Scripts/Menus/HelpMenu.gd" id="10_bmxlf"]
 [ext_resource type="Texture2D" uid="uid://bj5kqi02cb1al" path="res://Art/CoolBetaBadge.png" id="12_j6h4m"]
 [ext_resource type="Texture2D" uid="uid://b2o8ajgwqyumy" path="res://Art/SheetSlices/Main/minewin.tres" id="15_jyyuj"]
 [ext_resource type="Texture2D" uid="uid://gq13yrfx6lk6" path="res://Art/Pause.png" id="15_vqus1"]
